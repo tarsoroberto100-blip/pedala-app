@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedala — Bicicletas compartilhadas</title>
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header class="topo">
+    <div>
+      <span class="logo">Pedala</span>
+      <span class="slogan">Bicicletas compartilhadas da cidade</span>
+    </div>
+    <span class="saldo-topo">Saldo: <strong id="saldoTopo">R$ 0,00</strong></span>
+  </header>
+
+  <main class="layout">
+    <section class="painel">
+      <h2>Carteira</h2>
+      <label for="recarga">Valor da recarga (R$)</label>
+      <div class="linha-botao">
+        <input id="recarga" type="number" min="0" step="0.01" value="50">
+        <button type="button" class="botao" id="recarregar">Recarregar</button>
+      </div>
+      <p class="ajuda" id="ajudaBonus"></p>
+      <p class="mensagem" id="msgCarteira" role="status"></p>
+    </section>
+
+    <section class="painel">
+      <h2>Viagem</h2>
+      <form id="formViagem" novalidate>
+        <div class="linha">
+          <div>
+            <label for="codigo">Código da bicicleta</label>
+            <input id="codigo" type="text" placeholder="BK0123" autocomplete="off">
+          </div>
+          <div>
+            <label for="idade">Idade</label>
+            <input id="idade" type="number" min="0" value="18">
+          </div>
+        </div>
+        <div class="linha">
+          <div>
+            <label for="inicio">Retirada</label>
+            <input id="inicio" type="time" value="08:10">
+          </div>
+          <div>
+            <label for="fim">Devolução</label>
+            <input id="fim" type="time" value="08:35">
+          </div>
+        </div>
+        <div class="opcoes">
+          <label class="check"><input id="plano" type="checkbox"> Sou assinante do plano mensal</label>
+          <label class="check"><input id="estudante" type="checkbox"> Sou estudante</label>
+          <label class="check"><input id="foraDaEstacao" type="checkbox"> Devolvi fora de uma estação</label>
+        </div>
+        <div class="resumo">
+          <span>Duração: <strong id="rMinutos">0 min</strong></span>
+          <span>Valor: <strong id="rValor">R$ 0,00</strong></span>
+        </div>
+        <button type="submit" class="botao">Finalizar viagem</button>
+        <p class="mensagem" id="msgViagem" role="status"></p>
+      </form>
+    </section>
+
+    <section class="painel historico">
+      <h2>Histórico</h2>
+      <ul id="listaHistorico"></ul>
+      <button type="button" class="botao secundario" id="limpar">Limpar tudo</button>
+    </section>
+  </main>
+
+  <script src="js/regras.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "pedala-testes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Testes unitarios do Pedala com Jest",
+  "scripts": {
+    "test": "jest --verbose",
+    "cobertura": "jest --coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "collectCoverageFrom": ["app/js/regras.js"],
+    "coverageReporters": ["text", "html"]
+  }
+}
