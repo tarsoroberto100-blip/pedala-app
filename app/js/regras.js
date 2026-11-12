@@ -14,11 +14,11 @@ const PedalaRegras = (function () {
   }
 
   function validarIdade(idade) {
-    return Number.isInteger(idade) && idade > IDADE_MINIMA;
+    return Number.isInteger(idade) && idade >= IDADE_MINIMA;
   }
 
   function validarCodigoBike(codigo) {
-    return /^BK\d{4}$/i.test(String(codigo).trim());
+    return /^BK\d{4}$/.test(String(codigo).trim());
   }
 
   function paraMinutos(hora) {
@@ -41,14 +41,15 @@ const PedalaRegras = (function () {
   }
 
   function valorViagem(viagem) {
+    let valor;
     if (viagem.plano) {
-      return valorPlano(viagem.minutos);
+      valor = valorPlano(viagem.minutos);
+    } else {
+      valor = Math.min(DESBLOQUEIO + viagem.minutos * POR_MINUTO_AVULSO, TETO_AVULSO);
+      if (viagem.estudante) {
+        valor = valor * (100 - DESCONTO_ESTUDANTE) / 100;
+      }
     }
-    let valor = DESBLOQUEIO + viagem.minutos * POR_MINUTO_AVULSO;
-    if (viagem.estudante) {
-      valor = valor * (100 - DESCONTO_ESTUDANTE) / 100;
-    }
-    valor = Math.min(valor, TETO_AVULSO);
     if (viagem.foraDaEstacao) {
       valor = valor + MULTA_FORA_DA_ESTACAO;
     }
@@ -69,7 +70,7 @@ const PedalaRegras = (function () {
     if (valor >= 100) {
       return centavos(valor * 0.2);
     }
-    if (valor > 50) {
+    if (valor >= 50) {
       return centavos(valor * 0.1);
     }
     return 0;
